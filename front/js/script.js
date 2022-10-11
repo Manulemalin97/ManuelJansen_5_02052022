@@ -2,7 +2,7 @@ let objetsproduits =[];
 
 /* Recupération des données de l'API */
 
- fetch("http://localhost:3000/api/products")
+ fetch("http://localhost:3000/api/products") 
     // quand on a la réponse on donne le résultat en json.
     .then((res) => res.json())
     .then((promise) => {
