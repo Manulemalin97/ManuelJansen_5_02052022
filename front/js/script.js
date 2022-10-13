@@ -12,7 +12,7 @@ let objetsproduits =[];
       for (let article in objetsproduits) {
           // Insertion de "l'ancre" 
           let productLink = document.createElement("a");
-          document.querySelector(".items").appendChild(productLink);
+          document.querySelector(".items").appendChild(productLink);//querySelector()  ne renvoie pas une liste des résultats, mais le premier élément qui correspond à la recherche.
           productLink.href = `product.html?id=${objetsproduits[article]._id}`;
 
           // Insertion de l'élément "article" 
@@ -26,9 +26,9 @@ let objetsproduits =[];
 
           // <h3 class="productName">Kanap name1</h3>
         let productName = document.createElement("h3");
-        productArticle.appendChild(productName);
-        productName.classList.add('productName');
-        productName.textContent = objetsproduits[article].name;
+        productArticle.appendChild(productName);//appendChild. Cette fonction permet d'ajouter un élément à la liste des enfants du parent depuis lequel la fonction est appelée.
+        productName.classList.add('productName');//ajoute la classe a l'élément 
+        productName.textContent = objetsproduits[article].name;// on modifie le DOM avec .textContent
 
         // <p class="productDescription">Dis enim malesuada risus sapien gravida nulla nisl arcu. Dis enim malesuada risus sapien gravida nulla nisl arcu.</p>
         let productDescription = document.createElement("p");
