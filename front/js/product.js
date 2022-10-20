@@ -37,7 +37,22 @@ fetch("http://localhost:3000/api/products/" + idProduct)
       productColor.textContent = color;
       chosenColor.appendChild(productColor);
     }
-  });
-  
+    
+  })
 
-   
+//Début de l'étape 7 : Localstorage
+
+//on écoute le bouton pour enregistrer notre choix dans le localstorage
+let button = document.getElementById("addToCart");
+button.addEventListener("click", ()=>{ 
+ 
+//liste des éléments a conserver dans le local storage
+    function storageContent() {
+      localStorage.setItem('color', document.getElementById('colors').value);
+      localStorage.setItem('quantity', document.getElementById('quantity').value);
+      localStorage.setItem('title', document.getElementById('title').value); // exemple mais ne marche pas (undefined)
+      // récupérer l'id car elle est déjà dans le local storage reste la même .. 
+    }
+    storageContent()
+  
+   })
