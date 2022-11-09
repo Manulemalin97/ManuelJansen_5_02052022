@@ -35,64 +35,57 @@ fetch("http://localhost:3000/api/products/" + idProduct)
       productColor.value = color;
       productColor.textContent = color;
       chosenColor.appendChild(productColor);
-      
     }
   });
-  
-  // Localstorage
-function createCartArticle(articleId,articleColor,articleQuantity){
-  let cartArticle = {
-    id: articleId, 
-    color: articleColor,
-    quantity: articleQuantity
-  }
-  return cartArticle
-}
-function getCartArticle (articleId, articleColor){
-  let key = "article" + articleId + "_" + articleColor
-  let value = localStorage.getItem(key)
-  let cartArticle = JSON.parse(value)
-  return cartArticle
-}
-function setCartArticle(articleId,articleColor,articleQuantity){
-  let cartArticle = createCartArticle (articleId,articleColor,articleQuantity)
-  let key = "article" + articleId + "_" + articleColor
-let value = JSON.stringify(cartArticle)
- localStorage.setItem( key,value)
-}
-//on crée notre objet avec nos informations concernant le produit
 
- setCartArticle("107fb5b75607497b96722bda5b504926", "White", 0)
+// Localstorage
+function createCartArticle(articleId, articleColor, articleQuantity) {
+  let cartArticle = {
+    id: articleId,
+    color: articleColor,
+    quantity: articleQuantity,
+  };
+  return cartArticle;
+}
+
+function getCartArticle(articleId, articleColor) {
+  let key = "article" + articleId + "_" + articleColor;
+  let value = localStorage.getItem(key);
+  let cartArticle = JSON.parse(value);
+  return cartArticle;
+}
+function setCartArticle(articleId, articleColor, articleQuantity) {
+  let cartArticle = createCartArticle(articleId, articleColor, articleQuantity);
+  let key = "article" + articleId + "_" + articleColor;
+  let value = JSON.stringify(cartArticle);
+  localStorage.setItem(key, value);
+}
+/* Récupérer les options de l'article à ajouter au panier */
 
 // //On déclare notre objet dans le localStorage en indiquant son nom de clé, l'id et sa couleur. Ensuite on séréalise et on transforme nos données en chaine de caractère grace a JSON.stringify
 
-// //On modifie nos données du
- let sinopeWhite = getCartArticle("107fb5b75607497b96722bda5b504926","White")
- sinopeWhite.quantity++
-setCartArticle (sinopeWhite.id, sinopeWhite.color, sinopeWhite.quantity)
-
- setCartArticle("107fb5b75607497b96722bda5b504926", "Blue", 0)
- let sinopeBlue = getCartArticle("107fb5b75607497b96722bda5b504926","Blue")
- sinopeBlue.quantity += 5
-setCartArticle ( sinopeBlue.id,  sinopeBlue.color,  sinopeBlue.quantity)
-
-
 //le formulaire s'adapte au nombre d'options qu'il y a dans l'objet du produit
-function addToCart(){
-const color = document.getElementById("colors").value
-  const quantity = document.getElementById("quantity").value
-  // on paramètre les propriétés d'utilisateur, si couleur est nulle ou couleur = 0 et si quanitity = null ou 0 on retourne un message derreur 
-  if (color == null || color == "" || quantity == null || quantity == 0){
-   alert("Please select the color and the quantity")
-  }
-  setCartArticle(idProduct,color,quantity)
+function addToCart() {
+  const color = document.getElementById("colors").value;
+  const quantity = document.getElementById("quantity").value;
+  // on paramètre les propriétés d'utilisateur, si couleur est nulle ou couleur = 0 et si quanitity = null ou 0 on retourne un message derreur
+  if (color == null || color == "" || quantity == null || quantity == 0) {//null ou undefined a tester
+    alert("Please select a color and the quantity");
+    return false;//cela ne s'est pas bien passé
+  }else{
+  setCartArticle(idProduct, color, quantity);
+  return true; //cela s'est bien passé
 }
- const button = document.getElementById("addToCart")
- if (button != null){
- button.addEventListener("click", (e) => {
-   // en locurence ici on écoute notre panier pour savoir quel article doit etre chargé puis récupéré
-  addToCart()
-  window.location.href = "cart.html"
-  })
+}
+const button = document.getElementById("addToCart");
+if (button != null) {
+  button.addEventListener("click", (e) => {
+    // en locurence ici on écoute notre panier pour savoir quel article doit etre chargé puis récupéré
+
+   let ret = addToCart();
+   if(ret){//l'ajout s'est bien passé, on va sur la page panier
+    window.location.href = "cart.html";
   }
-  
+  });
+}
+/* Initialisation du local storage */
