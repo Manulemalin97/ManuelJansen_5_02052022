@@ -88,4 +88,4 @@ if (button != null) {
   }
   });
 }
-/* Initialisation du local storage */
+
