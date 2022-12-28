@@ -3,16 +3,19 @@ let objetsproduits =[];
 /* Recupération des données de l'API */
 
  fetch("http://localhost:3000/api/products")
-   // quand on a la réponse on donne le résultat en json.
+   // On passe une fonction de gestion à la méthode then() de la promesse. Lorsque l'opération de récupération a réussi (si elle a réussi), 
+   //la promesse appellera le gestionnaire en lui passant un objet Response, qui contient la réponse du serveur.
    .then((res) => res.json())
    .then((promise) => {
      objetsproduits = promise;
      console.log(objetsproduits);
-
+    //boucle qui va permettre la création des éléments et la distribution des informations de l'API
      for (let article in objetsproduits) {
        // Insertion de "l'ancre"
        let productLink = document.createElement("a");
-       document.querySelector(".items").appendChild(productLink); //querySelector()  ne renvoie pas une liste des résultats, mais le premier élément qui correspond à la recherche.
+       document.querySelector(".items").appendChild(productLink); //querySelector()  ne renvoie pas une liste des résultats, 
+       //mais le premier élément qui correspond à la recherche.
+
        productLink.href = `product.html?id=${objetsproduits[article]._id}`;
 
        // Insertion de l'élément "article"
